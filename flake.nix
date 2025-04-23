@@ -4,8 +4,8 @@
   inputs = {
     # nixpkgs do not provide binary cache for riscv64-linux, we need to build everything from scratch anyway.
     # so we can use the small channel to get updates more quickly.
-    #    checkout more details here: https://hydra.nixos.org/jobset/nixos/release-23.05#tabs-jobs
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05-small";
+    #    checkout more details here: https://hydra.nixos.org/jobset/nixos/release-24.11#tabs-jobs
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11-small";
   };
 
   outputs = {
