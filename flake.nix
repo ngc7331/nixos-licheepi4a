@@ -53,8 +53,8 @@
         src = super.fetchFromGitHub {
           owner = "revyos";
           repo = "thead-kernel";
-          rev = "9c58afc7addc5a4a5deef24dfe6a4a103549d3da"; # branch lpi4a, 2023-06-24
-          sha256 = "sha256-9R+XY18uDuMWjVzLkg4lTmxDltsvyI51qvm34SNVI4I=";
+          rev = "b9cf70c75d2b7482195a94e754d59f8cfc9dda2c"; # lpi4a on 2025.04.23
+          sha256 = "sha256-XfPUUcPLLsQ/Zz61GRbTfasUOFbnfihDSSEqoKmSB48=";
         };
         stdenv = super.gcc13Stdenv;
         kernelPatches = with super.kernelPatches; [

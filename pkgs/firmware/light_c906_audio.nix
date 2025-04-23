@@ -1,17 +1,19 @@
 {
   stdenv,
-  fetchurl,
+  fetchFromGitHub,
 }:
 stdenv.mkDerivation {
   pname = "light_c906_audio-firmware";
-  version = "unstable-2023-08-04";
+  version = "2025.04.23";
 
-  src = fetchurl {
-    url = "https://github.com/chainsx/fedora-riscv-builder/raw/f35095c9f45b42addb1b0d0e9185ca8ff04ed870/firmware/light_c906_audio.bin"; # tag: 20230804-1242
-    hash = "sha256-hv9OQhc6cH7swqVrhPhIxgUsgH4JMiOjw+DRWcK9nNQ=";
+  src = fetchFromGitHub {
+    owner = "revyos";
+    repo = "th1520-boot-firmware";
+    rev = "44ec4e1cc82141963842ec45db0d1617f9f07e75"; # master on 2025.04.23
+    sha256 = "sha256-MjiSpdySqCr4j9i3RPJ08mBHCQAy1fA9m787hKEIwUA=";
   };
 
   buildCommand = ''
-    install -Dm444 $src $out/lib/firmware/light_c906_audio.bin
+    install -Dm444 $src/addons/boot/light_c906_audio.bin $out/lib/firmware/light_c906_audio.bin
   '';
 }
