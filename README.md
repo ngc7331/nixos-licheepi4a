@@ -14,7 +14,7 @@ Default user: `lp4a`, default password: `lp4a`.
 - [x] support for booting from emmc
 - [ ] fix the sdImage's file size
 - [ ] fix the sdImage's auto resize after the first boot.
-- [ ] Failed to enable firewall due to the error: `firewall-start[2300]: iptables: Failed to initialize nft: Protocol not supported`
+- [x] Failed to enable firewall due to the error: `firewall-start[2300]: iptables: Failed to initialize nft: Protocol not supported`
 - [ ] verify all the hardware features available by th1520
     - [x] ethernet (rj45)
     - [x] wifi
