@@ -72,8 +72,9 @@
     curl
 
     neofetch
-    lm_sensors  # `sensors`
-    btop     # replacement of htop/nmon
+    lm_sensors
+    htop
+    zsh
 
     # Peripherals
     mtdutils
