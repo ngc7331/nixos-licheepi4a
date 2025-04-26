@@ -39,7 +39,7 @@
     enableRedistributableFirmware = true;
 
     # TODO GPU driver
-    opengl = {
+    graphics = {
       enable = false;
     };
 
