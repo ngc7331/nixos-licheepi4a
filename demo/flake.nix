@@ -2,7 +2,7 @@
   description = "NixOS configuration for licheepi4a remote deployment";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11-small";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
     nixos-licheepi4a.url = "github:ryan4yin/nixos-licheepi4a";
   };
 
