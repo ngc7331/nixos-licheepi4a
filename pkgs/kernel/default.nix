@@ -16,13 +16,21 @@
   stdenv,
   ubootTools,
   linuxManualConfig,
+  fetchFromGitHub,
   ...
 }:
 (linuxManualConfig {
   version = "5.10.113-thead-1520";
   modDirVersion = "5.10.113";
 
-  inherit src lib stdenv;
+  inherit lib stdenv;
+
+  src = fetchFromGitHub {
+    owner = "revyos";
+    repo = "thead-kernel";
+    rev = "b9cf70c75d2b7482195a94e754d59f8cfc9dda2c"; # lpi4a on 2025.04.23
+    sha256 = "sha256-XfPUUcPLLsQ/Zz61GRbTfasUOFbnfihDSSEqoKmSB48=";
+  };
   
   # path to the generated kernel config file
   # 

@@ -46,13 +46,6 @@
     };
     overlay = self: super: {
       linuxPackages_thead = super.linuxPackagesFor (super.callPackage ./pkgs/kernel {
-        # according to https://github.com/sipeed/LicheePi4A/blob/pre-view/.gitmodules
-        src = super.fetchFromGitHub {
-          owner = "revyos";
-          repo = "thead-kernel";
-          rev = "b9cf70c75d2b7482195a94e754d59f8cfc9dda2c"; # lpi4a on 2025.04.23
-          sha256 = "sha256-XfPUUcPLLsQ/Zz61GRbTfasUOFbnfihDSSEqoKmSB48=";
-        };
         stdenv = super.gcc13Stdenv;
         kernelPatches = with super.kernelPatches; [
           bridge_stp_helper
