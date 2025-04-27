@@ -294,7 +294,7 @@ CONFIG_RISCV_SWIOTLB=y
 
 CONFIG_FPU=y
 # CONFIG_VECTOR is not set
-# CONFIG_THEAD_ISA is not set
+CONFIG_THEAD_ISA=y
 # end of Platform type
 
 #
