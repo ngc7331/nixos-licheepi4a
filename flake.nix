@@ -117,7 +117,7 @@
         targetPkgs = pkgs_: (with pkgs_;
           [
             # we need theses packages to run `make menuconfig` successfully.
-            pkgconfig
+            pkg-config
             ncurses
 
             pkgsKernelCross.gcc13Stdenv.cc
