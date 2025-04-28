@@ -76,6 +76,11 @@
     htop
     zsh
 
+    python3
+    gcc
+    gnumake
+    cmake
+
     # Peripherals
     mtdutils
     i2c-tools
