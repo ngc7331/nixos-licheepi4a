@@ -10,6 +10,18 @@
     nixpkgs,
     ...
   }: let
+    # Ref: https://github.com/riscv-non-isa/riscv-toolchain-conventions/blob/main/src/toolchain-conventions.adoc
+
+    # "Z*"
+    standard-extensions = [
+      # gcc support @ 13.0.0: https://gcc.gnu.org/gcc-13/changes.html#riscv
+      # qemu support @ 7.0: https://wiki.qemu.org/ChangeLog/7.0
+      "fh"
+    ];
+
+    # "Xthead*"
+    # gcc support @ 13.0.0: https://gcc.gnu.org/gcc-13/changes.html#riscv
+    # qemu support @ 8.0: https://wiki.qemu.org/ChangeLog/8.0, except Xtheadint
     thead-extensions = [
       "ba"
       "bb"
@@ -25,45 +37,19 @@
       "sync"
     ];
 
-    # https://nixos.wiki/wiki/Build_flags
-    # this option equals to add `-march=rv64gc` into CFLAGS.
-    # CFLAGS will be used as the command line arguments for the gcc/clang.
-    #
-    # Note: CFLAGS is not used by the kernel build system! so this would not work for the kernel build.
-    #
-    # A little more detail;
-    # RISC-V is a modular ISA, meaning that it only has a mandatory base,
-    # and everything else is an extension.
-    # RV64GC is basically "RISC-V 64-bit, extensions G and C":
-    #
-    #  G: Shorthand for the IMAFDZicsr_Zifencei base and extensions
-    #  C: Standard Extension for Compressed Instructions
-    #
-    # for more details about the shorthand of RISC-V's extension, see:
-    #   https://en.wikipedia.org/wiki/RISC-V#Design
-    #
-    # LicheePi 4A is a high-performance development board which supports extension G and C.
-    # we need to enable them to get revyos's kernel built.
-    gcc-march = "rv64gc"
-    # We cannot use V extension, as gcc13 support v0.11, gcc 14 support v1.0, but C910 is v0.7
-    #      + "v"
-    # And gcc13 supported standard extensions: https://gcc.gnu.org/gcc-13/changes.html#riscv
-          + "_zfh"
-    # And gcc13 supported t-head vendor extensions: https://gcc.gnu.org/gcc-13/changes.html#riscv
-          + builtins.concatStringsSep "" (map (ext: "_xthead" + ext) thead-extensions)
-          ;
-
-    # the same as `-mabi=lp64d` in CFLAGS.
-    #
-    # Note: CFLAGS is not used by the kernel build system! so this would not work for the kernel build.
-    #
+    # g: general purpose: IMAFD_Zicsr_Zifencei
+    # c: compressed instruction
+    # v: vector
+    # we cannot use v extension, as gcc13 support v0.11, gcc 14 support v1.0, but C910 is v0.7
+    gcc-march = "rv64gc" # "v" is not enabled
+              + builtins.concatStringsSep "" (map (ext: "_z" + ext) standard-extensions)
+              + builtins.concatStringsSep "" (map (ext: "_xthead" + ext) thead-extensions)
+              ;
     # lp64d: long, pointers are 64-bit. GPRs, 64-bit FPRs, and the stack are used for parameter passing.
-    #
-    # related docs:
-    #  https://github.com/riscv-non-isa/riscv-toolchain-conventions/blob/master/README.mkd#specifying-the-target-abi-with--mabi
     gcc-mabi = "lp64d";
 
-    qemu-cpu = "rv64"
+    qemu-cpu = "rv64,g=true,c=true" # ",v=true" is not enabled
+             + builtins.concatStringsSep "" (map (ext: ",z" + ext + "=true") standard-extensions)
              + builtins.concatStringsSep "" (map (ext: ",xthead" + ext + "=true") thead-extensions)
              ;
 
@@ -161,9 +147,8 @@
           export ARCH=riscv
           export PKG_CONFIG_PATH="${pkgsHost.ncurses.dev}/lib/pkgconfig:"
 
-          # set the CFLAGS and CPPFLAGS to enable the rv64gc and lp64d.
-          # as described here:
-          #   https://github.com/graysky2/kernel_compiler_patch#alternative-way-to-define-a--march-option-without-this-patch
+          # set kernel c(pp)flags to apply gcc-march & gcc-mabi
+          # https://github.com/graysky2/kernel_compiler_patch#alternative-way-to-define-a--march-option-without-this-patch
           export KCFLAGS=' -march=${gcc-march} -mabi=${gcc-mabi}'
           export KCPPFLAGS=' -march=${gcc-march} -mabi=${gcc-mabi}'
 
