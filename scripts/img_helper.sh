@@ -3,7 +3,7 @@ select_img() {
     echo "Choose image to flash(${DEFAULT_IMAGE}):"
     read IMAGE
 
-    local IMAGE=${IMAGE:-${DEFAULT_IMAGE}}
+    IMAGE=${IMAGE:-${DEFAULT_IMAGE}}
     if [ ! -f "${IMAGE}" ]; then
       echo "No such image: ${IMAGE}"
       exit 1
