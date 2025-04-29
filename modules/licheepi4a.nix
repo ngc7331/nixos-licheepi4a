@@ -68,20 +68,28 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    git      # used by nix flakes
+    # === System utils ===
+    git
     curl
-
     neofetch
     lm_sensors
     htop
     zsh
 
+    # === Networking ===
+    tailscale
+    proxychains
+
+    # === Dev ===
+    nix-ld
+    docker
     python3
     gcc
     gnumake
     cmake
+    # openjdk # not support riscv64 now
 
-    # Peripherals
+    # === Peripherals ===
     mtdutils
     i2c-tools
     minicom
@@ -89,12 +97,21 @@
 
   # Enable the OpenSSH daemon.
   services.openssh = {
-    enable = lib.mkDefault true;
+    enable = true;
     settings = {
-      X11Forwarding = lib.mkDefault true;
-      PasswordAuthentication = lib.mkDefault true;
+      X11Forwarding = true;
+      PasswordAuthentication = true;
     };
-    openFirewall = lib.mkDefault true;
+    openFirewall = true;
   };
 
+  programs.zsh.enable = true;
+  users.defaultUserShell = pkgs.zsh;
+
+  # Fix for vscode-server, etc.
+  programs.nix-ld.enable = true;
+
+  virtualisation.docker.enable = true;
+
+  services.tailscale.enable = true;
 }
