@@ -81,7 +81,7 @@
     proxychains
 
     # === Dev ===
-    nix-ld
+    # nix-ld # nix-ld 2.0.0+ does not support riscv64 now
     docker
     python3
     gcc
@@ -109,7 +109,7 @@
   users.defaultUserShell = pkgs.zsh;
 
   # Fix for vscode-server, etc.
-  programs.nix-ld.enable = true;
+  # programs.nix-ld.enable = true; # nix-ld 2.0.0+ does not support riscv64 now
 
   virtualisation.docker.enable = true;
 
