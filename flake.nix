@@ -33,7 +33,7 @@
       # "int" # FIXME: QEMU 8.2.7 does not support this extension yet.
       "mac"
       "memidx"
-      # "mempair" # FIXME: Seem has bug on gcc 13.2.0: https://gcc.gnu.org/bugzilla/show_bug.cgi?id=114160
+      "mempair"
       "sync"
     ];
 
