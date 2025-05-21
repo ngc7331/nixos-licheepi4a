@@ -144,6 +144,18 @@ After the flash is complete, remove the SD card and reboot, you should see NixOS
 
 Also refer to [discusstion page](https://github.com/ngc7331/nixos-licheepi4a/discussions) for branchs and other known issues.
 
+## Kernel
+
+23.11 / 24.05 - based branches are using linux kernel 5.10 from revyos/thead-kernel.
+
+But it seems that the kernel has compatibility issues with glibc 2.40, known issues include:
+
+- `openssl` will complain any certificate is `Not yet valid`, so `curl` etc. will not work on https URLs.
+
+On the other hand, mainline kernel 6.5+ has introduced support for LicheePi 4A.
+
+Therefore, 24.11 and later branches will be using nixpkgs's `linuxPackages_latest` kernel and default config.
+
 ## Vendor extension
 
 Risc-v is a modulized architecture, it has loads of standard extensions and also allows manufacturers to add their own extensions.

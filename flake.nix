@@ -45,14 +45,6 @@
       gcc.abi = "lp64d";
     };
     overlay = self: super: {
-      linuxPackages_thead = super.linuxPackagesFor (super.callPackage ./pkgs/kernel {
-        stdenv = super.gcc13Stdenv;
-        kernelPatches = with super.kernelPatches; [
-          bridge_stp_helper
-          request_key_helper
-        ];
-      });
-
       light_aon_fpga = super.callPackage ./pkgs/firmware/light_aon_fpga.nix {};
       light_c906_audio = super.callPackage ./pkgs/firmware/light_c906_audio.nix {};
       thead-opensbi = super.callPackage ./pkgs/opensbi {};
