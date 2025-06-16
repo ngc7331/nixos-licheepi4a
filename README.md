@@ -89,7 +89,7 @@ sudo dd if=./nixos-licheepi4a-sd-image-*-riscv64-linux.img of=/dev/sdX bs=4M sta
 sudo fdisk /dev/sdb
 ```
 
-Please also refer to [scripts/flash_sd.sh](https://github.com/ngc7331/nixos-licheepi4a/blob/24.11/scripts/flash_sd.sh)
+Please also refer to [scripts/flash_sd.sh](https://github.com/ngc7331/nixos-licheepi4a/blob/25.05/scripts/flash_sd.sh)
 
 Now insert the SD card into the board, and power on, you should see NixOS booting.
 
