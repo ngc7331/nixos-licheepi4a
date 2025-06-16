@@ -101,6 +101,8 @@
             (import ./modules/t-head-hack/gobject-introspection/overlay.nix { inherit qemu-cpu; })
             # add QEMU arguments to fontconfig fonts cache build
             (import ./modules/t-head-hack/fontconfig/overlay.nix { inherit qemu-cpu; })
+            # add QEMU arguments to gdk-pixbuf build
+            (import ./modules/t-head-hack/gdk-pixbuf/overlay.nix { inherit qemu-cpu; })
           ];
         }
 
