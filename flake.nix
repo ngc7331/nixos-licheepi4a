@@ -99,6 +99,8 @@
             (import ./modules/t-head-hack/mesonEmulatorHook/overlay.nix { inherit qemu-cpu; })
             # add QEMU arguments to gobject-inrospection build & generated g-ir-scanner-qemuwrapper
             (import ./modules/t-head-hack/gobject-introspection/overlay.nix { inherit qemu-cpu; })
+            # add QEMU arguments to fontconfig fonts cache build
+            (import ./modules/t-head-hack/fontconfig/overlay.nix { inherit qemu-cpu; })
           ];
         }
 
