@@ -71,7 +71,7 @@
     # === System utils ===
     git
     curl
-    # neofetch # dependency `harfbuzz` failed to compile on riscv64, internal compiler error
+    neofetch
     lm_sensors
     htop
     zsh
