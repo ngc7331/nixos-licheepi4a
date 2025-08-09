@@ -64,6 +64,18 @@
         {
           nixpkgs.crossSystem = crossSystemConfig;
           nixpkgs.overlays = [
+            # disable -Werror=array-bounds for libphonenumber since it seems to have false positives
+            (import ./modules/riscv-hack/libphonenumber/overlay.nix)
+            # thin-provisioning-tools cross-compilation bug, PR#424930
+            (import ./modules/cross-hack/thin-provisioning-tools/overlay.nix)
+            # libmanette cross-compilation bug, PR#407662
+            (import ./modules/cross-hack/libmanette/overlay.nix)
+            # power-profiles-daemon cross-compilation bug
+            (import ./modules/cross-hack/power-profiles-daemon/overlay.nix)
+            # gnome-user-share cross-compilation bug
+            (import ./modules/cross-hack/gnome-user-share/overlay.nix)
+            # gnome-keyring cross-compilation bug
+            (import ./modules/cross-hack/gnome-keyring/overlay.nix)
           ];
         }
 

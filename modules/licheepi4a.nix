@@ -86,6 +86,41 @@
       gcc
   ];
 
+  # Windowing
+  services.xserver.enable = true;
+  services.xserver.displayManager.gdm.enable = true;
+  services.xserver.desktopManager.gnome.enable = true;
+  environment.gnome.excludePackages = (with pkgs; [
+    atomix # puzzle game
+    cheese # webcam tool
+    evince # document viewer
+    geary # email reader
+    gnome-characters
+    gnome-music
+    gnome-photos
+    gnome-tour
+    gnome-maps
+    gnome-weather
+    gnome-contacts
+    gnome-tecla
+    simple-scan
+    gedit
+    hitori # sudoku game
+    iagno # go game
+    tali # poker game
+    totem # video player
+    decibels # audio player
+    orca # screen reader
+    rygel # UPnP media server, failed to build on riscv64 (gst)
+    loupe # image viewer, failed to build on riscv64 (glycin-loaders)
+    snapshot # screenshot tool, failed to build on riscv64 (glycin-loaders)
+    sushi # file previewer, failed to build on riscv64 (webkitgtk)
+    epiphany # web browser, failed to build on riscv64 (webkitgtk)
+  ]);
+  services.gnome.rygel.enable = false; # UPnP media server, failed to build on riscv64
+  services.gnome.sushi.enable = false; # file previewer, failed to build on riscv64 (webkitgtk)
+  services.gnome.gnome-initial-setup.enable = false; # failed to build on riscv64 (webkitgtk)
+
   # Enable the OpenSSH daemon.
   services.openssh = {
     enable = lib.mkDefault true;
